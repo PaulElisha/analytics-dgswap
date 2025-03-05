@@ -149,6 +149,7 @@ function FactoriesTable({ data, sortConfig, requestSort, searchQuery }: Sortable
 function TokensTable({ data, sortConfig, requestSort, searchQuery }: SortableTableProps) {
   // This is a placeholder for the tokens table
   // In a real implementation, you would have token data
+  console.log(data, sortConfig, requestSort, searchQuery)
   return (
     <div className="bg-[#212429] rounded-lg p-8 text-center">
       <p className="text-gray-400">Token data would be displayed here</p>

@@ -1,5 +1,5 @@
 import type React from "react"
-import { Search, Menu } from "lucide-react"
+// import { Search, Menu } from "lucide-react"
 import { Link } from 'react-router-dom'
 
 export function Header() {
