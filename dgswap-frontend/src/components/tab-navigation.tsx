@@ -11,12 +11,12 @@ export function TabNavigation({ activeTab, onChange }: TabNavigationProps) {
         <TabButton active={activeTab === "overview"} onClick={() => onChange("overview")}>
           Overview
         </TabButton>
-        <TabButton active={activeTab === "pools"} onClick={() => onChange("pools")}>
+        {/* <TabButton active={activeTab === "pools"} onClick={() => onChange("pools")}>
           Pools
         </TabButton>
         <TabButton active={activeTab === "tokens"} onClick={() => onChange("tokens")}>
           Tokens
-        </TabButton>
+        </TabButton> */}
       </nav>
     </div>
   )
