@@ -1,0 +1,3 @@
+[submodule "dgswap-frontend/subgraph-dgswap"]
+	path = dgswap-frontend/subgraph-dgswap
+	url = https://github.com/CoderOfPHCity/subgraph-dgswap.git

@@ -1,0 +1,22 @@
+type Factory @entity {
+  id: ID!              # Factory address
+  poolCount: BigInt!   # Number of pools created
+  txCount: BigInt!     # Total transactions (approximated)
+  totalVolumeUSD: BigDecimal!  # Total volume in USD
+}
+
+type Bundle @entity {
+  id: ID!              # Fixed as "1"
+  ethPriceUSD: BigDecimal!  # Price of Kaia in USD
+}
+
+type Pool @entity(immutable: true) {
+  id: Bytes!           # Pool address
+  token0: Bytes!       # address
+  token1: Bytes!       # address
+  fee: Int!            # uint24
+  tickSpacing: Int!    # int24
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

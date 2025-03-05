@@ -1,0 +1,28 @@
+specVersion: 1.2.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: dgswap
+    network: kaia
+    source:
+      address: "0x7431A23897ecA6913D5c81666345D39F27d946A4"
+      abi: dgswap
+      startBlock: 145316741
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Factory
+        - Bundle
+        - Pool
+      abis:
+        - name: dgswap
+          file: ./abis/dgswap.json
+      eventHandlers:
+        - event: PoolCreated(indexed address,indexed address,indexed uint24,int24,address)
+          handler: handlePoolCreated
+      file: ./src/dgswap.ts

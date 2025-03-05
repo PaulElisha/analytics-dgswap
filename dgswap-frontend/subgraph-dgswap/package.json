@@ -1,0 +1,32 @@
+{
+ "name": "subgraph-dgswap",
+ "version": "1.0.0",
+ "description": "SDK for querying DragonSwap data on Kaia blockchain",
+ "main": "dist/index.js",
+ "types": "dist/index.d.ts",
+ "scripts": {
+  "codegen": "graph codegen",
+  "build": "graph build",
+  "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ dgswap",
+  "create-local": "graph create --node http://localhost:8020/ dgswap",
+  "remove-local": "graph remove --node http://localhost:8020/ dgswap",
+  "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 dgswap",
+  "test": "ts-node tests/dgswap.test.ts",
+  "format": "prettier --write \"src/**/*.{ts,js}\" \"tests/**/*.{ts,js}\""
+ },
+ "dependencies": {
+  "@graphprotocol/graph-cli": "0.96.0",
+  "@graphprotocol/graph-ts": "0.37.0",
+  "graphql-request": "^6.1.0"
+ },
+ "devDependencies": {
+  "matchstick-as": "0.6.0",
+  "ts-node": "^10.9.2"
+ },
+ "author": "Agantem Daniel,Paul Elisha",
+ "license": "MIT",
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/PaulElisha/subgraph-dgswap.git"
+ }
+}
