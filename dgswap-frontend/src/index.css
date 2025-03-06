@@ -1,7 +1,7 @@
 /* DragonSwap Netflix-Inspired Theme
    Created for the DragonSwap Aggregator Explorer
 */
-
+@import "tailwindcss";
 :root {
   --netflix-red: #e50914;
   --netflix-black: #141414;

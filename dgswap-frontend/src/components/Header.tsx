@@ -7,7 +7,7 @@ export function Header() {
     <header className="bg-[#191B1F] border-b border-gray-800 sticky top-0 z-10 backdrop-blur-md bg-opacity-80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* <div className="flex items-center">
+           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
                 DragonSwap
@@ -23,7 +23,7 @@ export function Header() {
                 Subgraph
               </NavLink>
             </nav>
-          </div> */}
+          </div> 
           <div style={{ display: 'flex', alignItems: 'center' }}>
   <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
     <span style={{ 
@@ -50,19 +50,10 @@ export function Header() {
   </nav>
 </div>
           <div className="flex items-center">
-            {/* <div className="hidden md:block">
-              <button className="p-2 rounded-full bg-[#212429] hover:bg-[#2C2F36] transition-colors">
-                <Search className="w-5 h-5 text-gray-400" />
-              </button>
-            </div> */}
-            {/* <div className="md:hidden ml-4">
-              <button className="p-2 rounded-full bg-[#212429] hover:bg-[#2C2F36] transition-colors">
-                <Menu className="w-5 h-5" />
-              </button>
-            </div> */}
-            {/* <button className="ml-4 px-4 py-2 rounded-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-medium transition-colors">
+            
+            <button className="ml-4 px-4 py-2 rounded-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-medium transition-colors">
               Connect Wallet
-            </button> */}
+            </button> 
           </div>
         </div>
       </div>
