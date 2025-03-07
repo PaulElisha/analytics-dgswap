@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { sdk } from "../lib/sdk";
-import { Factory, Pool } from "../../subgraph-dgswap/src";
+import { sdk } from "../lib/sdk"; 
+import { Factory, Pool, Token } from "../../subgraph-dgswap/src";
 
-
-type DataType = "factories" | "pools";
-
-export const useSubgraphData = (dataType: DataType, limit: number = 5) => {
+export const useSubgraphData = (limit: number = 5) => {
   const [factories, setFactories] = useState<Factory[]>([]);
   const [pools, setPools] = useState<Pool[]>([]);
+  const [tokens, setTokens] = useState<Token[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,32 +13,36 @@ export const useSubgraphData = (dataType: DataType, limit: number = 5) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        if (dataType === "factories") {
-          const data = await sdk.getFactories();
-          setFactories(data);
-          setPools([]); // Reset pools
-          console.log("Fetched factories:", data);
-        } else if (dataType === "pools") {
-          const data = await sdk.getPools();
-          setPools(data);
-          setFactories([]); // Reset factories
-          console.log("Fetched pools:", data);
-        }
-        else if (dataType === "tokens") {
+        setError(null);
 
-          setFactories([])
-          setPools([])
-        }
+        // Fetch all data in parallel
+        const [factoriesData, poolsData, tokensData] = await Promise.all([
+          sdk.getFactories(limit),
+          sdk.getPools(limit),
+          sdk.getTokens(limit),
+        ]);
+
+        setFactories(factoriesData);
+        setPools(poolsData);
+        setTokens(tokensData);
+        
+        console.log("Factories:", factoriesData);
+        console.log("Pools:", poolsData);
+        console.log("Tokens:", tokensData);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : `Failed to fetch ${dataType}`;
+        setError(err instanceof Error ? err.message : "Failed to fetch data");
         console.error("Fetch error:", err);
-        setError(errorMessage);
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
-  }, [dataType, limit]);
 
-  return { factories, pools, loading, error };
+    fetchData();
+
+    // Poll for updates every 30 seconds
+    const interval = setInterval(fetchData, 30000);
+    return () => clearInterval(interval);
+  }, [limit]);
+
+  return { factories, pools, tokens, loading, error };
 };

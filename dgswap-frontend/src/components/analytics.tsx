@@ -15,8 +15,11 @@ export function Analytics() {
   const [searchQuery, setSearchQuery] = useState("")
   const [limit, _] = useState(10)
 
-  const { factories, pools, loading, error } = useSubgraphData(activeTab === "overview" ? "factories" : "pools", limit)
-  // Calculate aggregate stats
+  const { factories, pools, tokens, loading, error } = useSubgraphData(limit);
+console.log("tokens", tokens);
+console.log("factories", factories);
+console.log("pools", pools);
+
   const totalVolumeUSD = factories.reduce((sum, f) => sum + Number(f.totalVolumeUSD), 0)
   const totalPools = factories.reduce((sum, f) => sum + Number(f.poolCount), 0)
   const totalTxs = factories.reduce((sum, f) => sum + Number(f.txCount), 0)

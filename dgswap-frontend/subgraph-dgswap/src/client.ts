@@ -109,10 +109,10 @@ export class DragonSwapSubgraphSDK {
   //   return result.tokens;
   // }
 
-  async getPools(): Promise<Pool[]> {
+  async getPools(first: number = 20): Promise<Pool[]> { // 🔥 FIXED: Accepts `first`
     const query = `
-      query GetTopPools($first: Int!) {
-        pools(first: $first, orderBy: liquidity, orderDirection: desc) {
+      query GetPools($first: Int!) {
+        pools(first: $first) {
           id
           feeTier
           liquidity
@@ -131,15 +131,14 @@ export class DragonSwapSubgraphSDK {
   
     return this.requestData<{ pools: Pool[] }>(
       query,
-      { first: 20 }, 
+      { first },
       "pools"
     ).then(result => result.pools);
   }
   
-
-  async getTokens(): Promise<Token[]> {
+  async getTokens(first: number = 20): Promise<Token[]> { // 🔥 FIXED: Accepts `first`
     const query = `
-      query GetTopTokens($first: Int!) {
+      query GetTokens($first: Int!) {
         tokens(first: $first, orderBy: volume, orderDirection: desc) {
           id
           name
@@ -154,10 +153,11 @@ export class DragonSwapSubgraphSDK {
   
     return this.requestData<{ tokens: Token[] }>(
       query,
-      { first: 20 },
+      { first },
       "tokens"
     ).then(result => result.tokens);
   }
+  
   
   
 }

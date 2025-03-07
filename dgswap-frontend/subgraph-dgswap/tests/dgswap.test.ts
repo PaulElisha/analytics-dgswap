@@ -18,11 +18,13 @@ async function testQuery<T>(
 async function testSDK() {
   // subgraph endpoint
   const endpoint =
-    "https://gateway.thegraph.com/api/{api-key}/subgraphs/id/DFu3UKnkVWq4xgYq5NFerMu6puA9SkqdMyjjWmauwqqM";
+    "https://gateway.thegraph.com/api/5733d860ca08946bf713149481b3acbd/subgraphs/id/DFu3UKnkVWq4xgYq5NFerMu6puA9SkqdMyjjWmauwqqM";
   const sdk = new DragonSwapSubgraphSDK(endpoint);
 
   await testQuery(sdk, () => sdk.getFactories(5), "Factories");
   await testQuery(sdk, () => sdk.getBundles(5), "Bundles");
+  await testQuery(sdk, () => sdk.getPools(5), "Pools");
+  await testQuery(sdk, () => sdk.getTokens(5), "Tokens");
 }
 
 testSDK();
