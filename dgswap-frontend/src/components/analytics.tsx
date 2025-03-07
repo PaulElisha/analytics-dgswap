@@ -8,12 +8,16 @@ import { TabNavigation } from "../components/tab-navigation"
 import { DataTable } from "../components/data-table"
 import { SearchFilter } from "../components/search-filter"
 import { TimeframeSelector } from "../components/timeframe-selector"
+import { NavSelector } from "./navigation"
 
 export function Analytics() {
   const [activeTab, setActiveTab] = useState<"overview" | "pools" | "tokens">("overview")
   const [timeframe, setTimeframe] = useState<"24h" | "7d" | "30d" | "all">("24h")
   const [searchQuery, setSearchQuery] = useState("")
   const [limit, _] = useState(10)
+  const [activeNav, setActiveNav] = useState<"Pools" | "Tokens">("Pools")
+
+
 
   const { factories, pools, tokens, loading, error } = useSubgraphData(limit);
 console.log("tokens", tokens);
@@ -67,7 +71,11 @@ console.log("pools", pools);
           />
         )}
       </main>
+      <NavSelector value={activeNav} onChange={setActiveNav} />
 
+     
+      
+        
       <footer className="py-8 text-center text-gray-500 text-sm border-t border-gray-800">
         <p>
           Powered by{" "}
