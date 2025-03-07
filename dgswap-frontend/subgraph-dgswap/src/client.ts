@@ -1,5 +1,5 @@
 import { GraphQLClient, RequestDocument } from "graphql-request";
-import { Factory, Bundle, Pool } from "./types";
+import { Factory, Bundle, Pool, Token } from "./types";
 
 export class DragonSwapSubgraphSDK {
   private client: GraphQLClient;
@@ -59,26 +59,105 @@ export class DragonSwapSubgraphSDK {
     return result.bundles;
   }
 
-  async getPools(first: number = 5): Promise<Pool[]> {
+  // async getPools(first: number = 5): Promise<Pool[]> {
+  //   const query = `
+  //     query GetPools($first: Int!) {
+  //       pools(first: $first) {
+  //         id
+  //         feeTier
+  //         liquidity
+  //         sqrtPrice
+  //         token0 {
+  //           id
+  //           symbol
+  //         }
+  //         token1 {
+  //           id
+  //           symbol
+  //         }
+  //       }
+  //     }
+  //   `;
+  //   const result = await this.requestData<{ pools: Pool[] }>(
+  //     query,
+  //     { first },
+  //     "pools"
+  //   );
+  //   return result.pools;
+  // }
+  
+
+  // async getTokens(first: number = 5): Promise<Token[]> {
+  //   const query = `
+  //     query GetTokens($first: Int!) {
+  //       tokens(first: $first) {
+  //         id
+  //         name
+  //         symbol
+  //         decimals
+  //         totalSupply
+  //         txCount
+  //         volume
+  //       }
+  //     }
+  //   `;
+  //   const result = await this.requestData<{ tokens: Token[] }>(
+  //     query,
+  //     { first },
+  //     "tokens"
+  //   );
+  //   return result.tokens;
+  // }
+
+  async getPools(): Promise<Pool[]> {
     const query = `
-      query GetPools($first: Int!) {
-        pools(first: $first) {
+      query GetTopPools($first: Int!) {
+        pools(first: $first, orderBy: liquidity, orderDirection: desc) {
           id
-          token0
-          token1
-          fee
-          tickSpacing
-          blockNumber
-          blockTimestamp
-          transactionHash
+          feeTier
+          liquidity
+          sqrtPrice
+          token0 {
+            id
+            symbol
+          }
+          token1 {
+            id
+            symbol
+          }
         }
       }
     `;
-    const result = await this.requestData<{ pools: Pool[] }>(
+  
+    return this.requestData<{ pools: Pool[] }>(
       query,
-      { first },
-      "pools",
-    );
-    return result.pools;
+      { first: 20 }, 
+      "pools"
+    ).then(result => result.pools);
   }
+  
+
+  async getTokens(): Promise<Token[]> {
+    const query = `
+      query GetTopTokens($first: Int!) {
+        tokens(first: $first, orderBy: volume, orderDirection: desc) {
+          id
+          name
+          symbol
+          decimals
+          totalSupply
+          txCount
+          volume
+        }
+      }
+    `;
+  
+    return this.requestData<{ tokens: Token[] }>(
+      query,
+      { first: 20 },
+      "tokens"
+    ).then(result => result.tokens);
+  }
+  
+  
 }

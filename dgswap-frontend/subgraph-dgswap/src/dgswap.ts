@@ -1,5 +1,5 @@
 import { PoolCreated as PoolCreatedEvent } from "../generated/dgswap/dgswap";
-import { Factory, Bundle, Pool } from "../generated/schema";
+import { Factory, Bundle, Pool, Token } from "../generated/schema";
 import { BigInt, BigDecimal } from "@graphprotocol/graph-ts";
 
 let FACTORY_ADDRESS = "0x7431A23897ecA6913D5c81666345D39F27d946A4";
@@ -28,6 +28,18 @@ function getOrCreateBundle(): Bundle {
   return bundle;
 }
 
+function getOrCreateToken(tokenAddress: string): Token {
+  let token = Token.load(tokenAddress);
+  if (token == null) {
+    token = new Token(tokenAddress);
+    token.name = "Unknown"; // Placeholder (you might need an API call later)
+    token.symbol = "UNK";   // Placeholder
+    token.decimals = BigInt.fromI32(18); // Default assumption
+    token.save();
+  }
+  return token;
+}
+
 export function handlePoolCreated(event: PoolCreatedEvent): void {
   // Factory
   let factory = getOrCreateFactory();
@@ -35,6 +47,8 @@ export function handlePoolCreated(event: PoolCreatedEvent): void {
   factory.txCount = factory.txCount.plus(BigInt.fromI32(1));
   factory.save();
 
+  getOrCreateToken(event.params.token0.toHexString());
+  getOrCreateToken(event.params.token1.toHexString());
   // Create Pool
   let pool = new Pool(event.transaction.hash.concatI32(event.logIndex.toI32()));
   pool.token0 = event.params.token0;

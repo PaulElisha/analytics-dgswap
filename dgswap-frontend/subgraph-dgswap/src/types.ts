@@ -10,13 +10,27 @@ export interface Bundle {
   ethPriceUSD: string;
 }
 
+export interface Token {
+  id: string;
+  name: string;
+  symbol: string;
+  decimals: string;
+  totalSupply: string;
+  txCount: string;
+  volume: string;
+}
+
 export interface Pool {
   id: string;
-  token0: string;
-  token1: string;
-  fee: string;
-  tickSpacing: string;
-  blockNumber: string;
-  blockTimestamp: string;
-  transactionHash: string;
+  feeTier: string;
+  liquidity: string;
+  sqrtPrice: string;
+  token0: {
+    id: string;
+    symbol: string;
+  };
+  token1: {
+    id: string;
+    symbol: string;
+  };
 }

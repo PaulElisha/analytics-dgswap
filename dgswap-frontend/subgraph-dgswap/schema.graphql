@@ -20,3 +20,10 @@ type Pool @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type Token @entity {
+  id: ID! # This will be the token address
+  name: String!
+  symbol: String!
+  decimals: BigInt!
+}

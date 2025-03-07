@@ -16,19 +16,18 @@ export const useSubgraphData = (dataType: DataType, limit: number = 5) => {
       try {
         setLoading(true);
         if (dataType === "factories") {
-          const data = await sdk.getFactories(limit);
+          const data = await sdk.getFactories();
           setFactories(data);
           setPools([]); // Reset pools
           console.log("Fetched factories:", data);
         } else if (dataType === "pools") {
-          const data = await sdk.getPools(limit);
+          const data = await sdk.getPools();
           setPools(data);
           setFactories([]); // Reset factories
           console.log("Fetched pools:", data);
         }
         else if (dataType === "tokens") {
-          // In a real implementation, you would fetch token data here
-          // For now, we'll just reset both
+
           setFactories([])
           setPools([])
         }
