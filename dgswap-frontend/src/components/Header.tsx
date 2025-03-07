@@ -25,17 +25,7 @@ export function Header() {
             </nav>
           </div> 
           <div style={{ display: 'flex', alignItems: 'center' }}>
-  <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-    <span style={{ 
-      fontSize: '1.25rem', 
-      fontWeight: 'bold', 
-      backgroundImage: 'linear-gradient(to right, #ec4899, #8b5cf6)', 
-      WebkitBackgroundClip: 'text', 
-      color: 'transparent' 
-    }}>
-      DragonSwap
-    </span>
-  </Link>
+ 
   <nav style={{ 
     display: 'none', 
     marginLeft: '2.5rem', 
@@ -49,8 +39,7 @@ export function Header() {
     </NavLink>
   </nav>
 </div>
-          <div className="flex items-center">
-            
+          <div>
             <button className="ml-4 px-4 py-2 rounded-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-medium transition-colors">
               Connect Wallet
             </button> 
