@@ -21,23 +21,23 @@ export function OverviewStats({ totalVolumeUSD, totalPools, totalTxs, ethPrice, 
         title="Total Volume"
         value={loading ? "Loading..." : formatUSD(totalVolumeUSD)}
         change={volumeChange}
-        icon={<DollarSign className="w-5 h-5 text-pink-400" />}
+        icon={<DollarSign className="w-4 h-4  text-pink-400" />}
       />
       <StatCard
         title="Total Pools"
         value={loading ? "Loading..." : formatNumber(totalPools)}
-        icon={<Layers className="w-5 h-5 text-blue-400" />}
+        icon={<Layers className="w-4 h-4 text-blue-400" />}
       />
       <StatCard
         title="Total Transactions"
         value={loading ? "Loading..." : formatNumber(totalTxs)}
         change={txChange}
-        icon={<BarChart3 className="w-5 h-5 text-green-400" />}
+        icon={<BarChart3 className="w-4 h-4 text-green-400" />}
       />
       <StatCard
         title="ETH Price"
         value={loading ? "Loading..." : `$${ethPrice}`}
-        icon={<DollarSign className="w-5 h-5 text-yellow-400" />}
+        icon={<DollarSign className="w-4 h-4 text-yellow-400" />}
       />
     </div>
   )
@@ -53,7 +53,7 @@ interface StatCardProps {
 function StatCard({ title, value, change, icon }: StatCardProps) {
   return (
     <div className="bg-[#212429] rounded-2xl p-5 border border-gray-800 hover:border-gray-700 transition-all">
-      <div className="flex justify-between items-start mb-2">
+      <div className="flex justify-between items-center gap-2 mb-4">
         <h3 className="text-sm font-medium text-gray-400">{title}</h3>
         <div className="p-2 bg-[#2C2F36] rounded-lg">{icon}</div>
       </div>
