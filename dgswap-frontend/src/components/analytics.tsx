@@ -12,6 +12,7 @@ import { NavSelector } from "./navigation"
 import { ArrowUpDown } from "lucide-react"
 import { Tvl } from "./Area"
 import { Barchart } from "./Barchart"
+import {motion} from "framer-motion"
 
 export function Analytics() {
   const [activeTab, setActiveTab] = useState<"overview" | "pools" | "tokens">("overview")
@@ -36,7 +37,23 @@ console.log("pools", pools);
     <div className="min-h-screen bg-[#191B1F] text-white">
       <Header />
       <main className="res max-w-7xl flex gap-3 justify-around mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Tvl value={1800000}/> <Barchart value={totalVolumeUSD}/>
+       <motion.div 
+        whileInView={{opacity:1,x:0}}
+        initial={{opacity:0,x:-100}}
+        transition={{duration:1}}
+       >
+
+       <Tvl value={1800000}/>
+      </motion.div> 
+      <motion.div
+       whileInView={{opacity:1,x:0}}
+       initial={{opacity:0,x:100}}
+       transition={{duration:1}}
+      
+      >
+
+        <Barchart value={totalVolumeUSD}/>
+      </motion.div>
         </main>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero section with key metrics */}
