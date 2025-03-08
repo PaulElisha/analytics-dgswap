@@ -111,22 +111,33 @@ export class DragonSwapSubgraphSDK {
 
   async getPools(first: number = 20): Promise<Pool[]> { // 🔥 FIXED: Accepts `first`
     const query = `
-      query GetPools($first: Int!) {
-        pools(first: $first) {
-          id
-          feeTier
-          liquidity
-          sqrtPrice
-          token0 {
-            id
-            symbol
-          }
-          token1 {
-            id
-            symbol
-          }
-        }
-      }
+     query GetPools($first: Int!) {
+  pools(first: $first, orderBy: totalValueLockedUSD, orderDirection: desc) {
+    id
+    token0 {
+      symbol
+      name
+    }
+    token1 {
+      symbol
+      name
+    }
+    totalValueLockedUSD  # TVL
+    feeTier
+    volumeUSD           # Cumulative volume
+    volumeUSD1d: poolDayData(orderBy: date, orderDirection: desc, first: 1) {
+      volumeUSD         # 1D volume
+    }
+    volumeUSD30d: poolDayData(orderBy: date, orderDirection: desc, first: 30) {
+      volumeUSD         # 30D volume will need aggregation on client-side
+    }
+    apr: poolDayData(orderBy: date, orderDirection: desc, first: 1) {
+      feesUSD
+      volumeUSD
+      # APR would need to be calculated: (feesUSD/volumeUSD) * 365 * 100
+    }
+  }
+}
     `;
   
     return this.requestData<{ pools: Pool[] }>(
@@ -138,17 +149,25 @@ export class DragonSwapSubgraphSDK {
   
   async getTokens(first: number = 20): Promise<Token[]> { // 🔥 FIXED: Accepts `first`
     const query = `
-      query GetTokens($first: Int!) {
-        tokens(first: $first, orderBy: volume, orderDirection: desc) {
-          id
-          name
-          symbol
-          decimals
-          totalSupply
-          txCount
-          volume
-        }
-      }
+     query GetTokens($first: Int!) {
+  tokens(first: $first, orderBy: volumeUSD, orderDirection: desc) {
+    id
+    name
+    symbol
+    totalSupply
+    volumeUSD           # Total volume
+    derivedUSD          # Price in USD
+    fullyDilutedValuation: totalValueLockedUSD  # FDV = price * total supply
+    tokenHourData(orderBy: periodStartUnix, orderDirection: desc, first: 1) {
+      priceUSD          # Latest price
+  
+    }
+    tokenDayData(orderBy: date, orderDirection: desc, first: 1) {
+      priceUSD         # Latest price
+      volumeUSD        # 1-day volume
+    }
+  }
+}
     `;
   
     return this.requestData<{ tokens: Token[] }>(
