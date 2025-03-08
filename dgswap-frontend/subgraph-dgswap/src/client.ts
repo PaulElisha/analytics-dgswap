@@ -109,7 +109,7 @@ export class DragonSwapSubgraphSDK {
   //   return result.tokens;
   // }
 
-  async getPools(first: number = 20): Promise<Pool[]> { // 🔥 FIXED: Accepts `first`
+  async getPools(first: number = 20): Promise<Pool[]> { //  `first`
     const query = `
      query GetPools($first: Int!) {
   pools(first: $first, orderBy: totalValueLockedUSD, orderDirection: desc) {
@@ -147,7 +147,7 @@ export class DragonSwapSubgraphSDK {
     ).then(result => result.pools);
   }
   
-  async getTokens(first: number = 20): Promise<Token[]> { // 🔥 FIXED: Accepts `first`
+  async getTokens(first: number = 20): Promise<Token[]> { //  `first`
     const query = `
      query GetTokens($first: Int!) {
   tokens(first: $first, orderBy: volumeUSD, orderDirection: desc) {
