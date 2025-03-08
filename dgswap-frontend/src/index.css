@@ -591,6 +591,9 @@ section:has(.bg-\[\#2d2d2d\]) {
     display: flex;
     flex-direction: column;
   }
+  .size{
+    width: 250px;
+  }
 }
 .empty-state-text {
   font-size: 1.25rem;
