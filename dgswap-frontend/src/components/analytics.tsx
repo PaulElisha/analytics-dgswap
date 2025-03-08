@@ -77,97 +77,78 @@ console.log("pools", pools);
       <NavSelector value={activeNav} onChange={setActiveNav} />
    
 
-{activeNav === 'Tokens' ? 
-       (<div className="bg-[#212429] rounded-lg overflow-hidden mt-3">
-             <div className="overflow-x-auto">
-               <table className="min-w-full divide-y divide-gray-800">
-                 <thead className="bg-[#2C2F36]">
-                   <tr>
-                     <SortableHeader label="ID" sortKey="id"
-                      />
-                     <SortableHeader label="NAME" 
-                     sortKey="poolCount" 
-                      />
-                      <SortableHeader label="SYMBOL" 
-                     sortKey="poolCount" 
-                      />
-                     <SortableHeader
-                       label="TOTAL SUPPLY"
-                       sortKey="txCount"
-                      
-                     />
-                     <SortableHeader
-                       label="TRANSACTIONS"
-                       sortKey="totalVolumeUSD"
-                       
-                     />
-                     <SortableHeader
-                       label="VOLUME"
-                       sortKey="totalVolumeUSD"
-                       
-                     />
-                   </tr>
-                 </thead>
-                 <tbody className="divide-y divide-gray-800 bg-[#212429]">
-                   {tokens.map((token) => (
-                     <tr key={token.id} className="hover:bg-[#2C2F36] transition-colors">
-                       <td className="px-6 py-4 whitespace-nowrap">
-                         <div className="flex items-center">
-                           <div className="ml-4">
-                             <div className="text-sm font-medium">
-                               {token?.id.slice(0, 6)}...{token.id.slice(-4)}
-                             </div>
-                           </div>
-                         </div>
-                       </td>
-                       <td className="px-6 py-4 whitespace-nowrap text-sm">{token.name}</td>
-                       <td className="px-6 py-4 whitespace-nowrap text-sm">{token.symbol}</td>
-
-                       <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(Number(token.totalSupply))}</td>
-                       <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(Number(token.txCount))}</td>
-                       <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(Number(token.volume))}</td>
-                     </tr>
-                   ))}
-                 </tbody>
-               </table>
-             </div>
-           </div>):(
-            <div className="bg-[#212429] rounded-lg overflow-hidden mt-3">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-800">
-                <thead className="bg-[#2C2F36]">
-                  <tr>
-                    <SortableHeader label="feeTier" />
-                    <SortableHeader label="ID" />
-                     <SortableHeader label="Liquidity"/>
-                    <SortableHeader label="SqrtPrice"/> 
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-800 bg-[#212429]">
-                  {pools.map((pool) => (
-                    <tr key={pool?.id} className="hover:bg-[#2C2F36] transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">{pool?.feeTier}</td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="ml-4">
-                            <div className="text-sm font-medium">
-                              {pool?.id.slice(0, 6)}...{pool.id.slice(-4)}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                     
-
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(Number(pool.liquidity))}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(Number(pool.sqrtPrice))}</td>
-
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-           )}
+{activeNav === 'Tokens' && (
+  <div className="bg-[#212429] rounded-lg overflow-hidden mt-3">
+    <div className="overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-800">
+        <thead className="bg-[#2C2F36]">
+          <tr>
+            <SortableHeader label="ID" sortKey="id" />
+            <SortableHeader label="NAME" sortKey="name" />
+            <SortableHeader label="SYMBOL" sortKey="symbol" />
+            <SortableHeader label="PRICE" sortKey="priceUSD" />
+            <SortableHeader label="1H %" sortKey="priceChange1h" />
+            <SortableHeader label="24H %" sortKey="priceChange1d" />
+            <SortableHeader label="VOLUME" sortKey="volumeUSD" />
+            <SortableHeader label="TOTAL SUPPLY" sortKey="totalSupply" />
+            <SortableHeader label="FDV" sortKey="fullyDilutedValuation" />
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-800 bg-[#212429]">
+          {tokens.map((token) => (
+            <tr key={token.id} className="hover:bg-[#2C2F36] transition-colors">
+              <td className="px-6 py-4 whitespace-nowrap">
+                {token.id.slice(0, 6)}...{token.id.slice(-4)}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{token.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{token.symbol}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.priceUSD)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1h.toFixed(2)}%</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1d.toFixed(2)}%</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.volumeUSD)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(token.totalSupply)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.fullyDilutedValuation)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
+{activeNav === 'Pools' && (
+  <div className="bg-[#212429] rounded-lg overflow-hidden mt-3">
+    <div className="overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-800">
+        <thead className="bg-[#2C2F36]">
+          <tr>
+            <SortableHeader label="ID" sortKey="id" />
+            <SortableHeader label="TOKEN PAIR" sortKey="token0.symbol" />
+            <SortableHeader label="TVL" sortKey="totalValueLockedUSD" />
+            <SortableHeader label="1D VOLUME" sortKey="volumeUSD1d" />
+            <SortableHeader label="30D VOLUME" sortKey="volumeUSD30d" />
+            <SortableHeader label="APR" sortKey="apr" />
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-800 bg-[#212429]">
+          {pools.map((pool) => (
+            <tr key={pool.id} className="hover:bg-[#2C2F36] transition-colors">
+              <td className="px-6 py-4 whitespace-nowrap">
+                {pool.id.slice(0, 6)}...{pool.id.slice(-4)}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">
+                {pool.token0.symbol}/{pool.token1.symbol}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(pool.totalValueLockedUSD)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(pool.volumeUSD1d)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(pool.volumeUSD30d)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{pool.apr.toFixed(2)}%</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
 
      </main>
       
