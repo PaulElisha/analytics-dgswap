@@ -1,5 +1,5 @@
 import type React from "react"
-import { formatUSD, formatNumber } from "../utils/format"
+import { formatNumber } from "../utils/format"
 import { ArrowUpRight, ArrowDownRight, Layers, BarChart3, DollarSign } from "lucide-react"
 
 interface OverviewStatsProps {
@@ -10,9 +10,9 @@ interface OverviewStatsProps {
   loading: boolean
 }
 
-export function OverviewStats({ totalVolumeUSD, totalPools, totalTxs, ethPrice, loading }: OverviewStatsProps) {
+export function OverviewStats({  totalPools, totalTxs, ethPrice, loading }: OverviewStatsProps) {
   // Placeholder data for 24h changes - in a real app, you'd calculate these
-  const volumeChange = 5.67
+  
   const txChange = -2.34
 
   return (

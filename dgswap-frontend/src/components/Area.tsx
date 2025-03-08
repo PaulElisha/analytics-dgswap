@@ -1,18 +1,16 @@
-"use client"
 
-import { TrendingUp } from "lucide-react"
+
+
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-import { formatUSD, formatNumber } from "../utils/format"
+import { formatNumber } from "../utils/format"
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
+  
   CardHeader,
-  CardTitle,
+ 
 } from "@/components/ui/card"
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -26,6 +24,7 @@ const chartData = [
   { month: "2023", desktop: 214, mobile: 140 },
 ]
 
+
 const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -35,9 +34,9 @@ const chartConfig = {
     label: "Mobile",
     color: "blue",
   },
-} satisfies ChartConfig
+} 
 
-export function Tvl({value}) {
+export function Tvl({ value }: { value: number }) {
   return (
     <Card>
       <CardHeader>

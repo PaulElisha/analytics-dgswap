@@ -36,7 +36,7 @@ console.log("pools", pools);
   return (
     <div className="min-h-screen bg-[#191B1F] text-white">
       <Header />
-      <main className="res max-w-7xl flex gap-3 justify-around mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="res max-w-7xl flex gap-3 justify-around items-center mx-auto px-4 sm:px-6 lg:px-8 py-8">
        <motion.div 
         whileInView={{opacity:1,x:0}}
         initial={{opacity:0,x:-100}}
@@ -126,7 +126,7 @@ console.log("pools", pools);
               <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1h.toFixed(2)}%</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1d.toFixed(2)}%</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.volumeUSD)}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(token.totalSupply)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(Number(token.totalSupply))}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.fullyDilutedValuation)}</td>
             </tr>
           ))}

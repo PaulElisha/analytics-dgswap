@@ -1,20 +1,16 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-import { formatUSD, formatNumber } from "../utils/format"
+import {  formatNumber } from "../utils/format"
 
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -37,9 +33,9 @@ const chartConfig = {
     label: "Mobile",
     color: "blue",
   },
-} satisfies ChartConfig
+}
 
-export function Barchart({value}) {
+export function Barchart({ value }: { value: number }) {
   return (
     <Card>
       <CardHeader>
