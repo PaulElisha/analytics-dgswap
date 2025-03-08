@@ -16,13 +16,8 @@ export function OverviewStats({ totalVolumeUSD, totalPools, totalTxs, ethPrice, 
   const txChange = -2.34
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <StatCard
-        title="Total Volume"
-        value={loading ? "Loading..." : formatUSD(totalVolumeUSD)}
-        change={volumeChange}
-        icon={<DollarSign className="w-4 h-4  text-pink-400" />}
-      />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[80px]">
+
       <StatCard
         title="Total Pools"
         value={loading ? "Loading..." : formatNumber(totalPools)}
@@ -52,7 +47,7 @@ interface StatCardProps {
 
 function StatCard({ title, value, change, icon }: StatCardProps) {
   return (
-    <div className="bg-[#212429] rounded-2xl p-5 border border-gray-800 hover:border-gray-700 transition-all">
+    <div className="bg-[#212429] rounded-2xl p-5 border w-[250px] border-gray-800 hover:border-gray-700 transition-all">
       <div className="flex justify-between items-center gap-2 mb-4">
         <h3 className="text-sm font-medium text-gray-400">{title}</h3>
         <div className="p-2 bg-[#2C2F36] rounded-lg">{icon}</div>

@@ -9,8 +9,9 @@ import { DataTable } from "../components/data-table"
 import { SearchFilter } from "../components/search-filter"
 import { TimeframeSelector } from "../components/timeframe-selector"
 import { NavSelector } from "./navigation"
-import { TokenCard } from "./TokenCard"
 import { ArrowUpDown } from "lucide-react"
+import { Tvl } from "./Area"
+import { Barchart } from "./Barchart"
 
 export function Analytics() {
   const [activeTab, setActiveTab] = useState<"overview" | "pools" | "tokens">("overview")
@@ -34,7 +35,9 @@ console.log("pools", pools);
   return (
     <div className="min-h-screen bg-[#191B1F] text-white">
       <Header />
-
+      <main className="res max-w-7xl flex gap-3 justify-around mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Tvl value={1800000}/> <Barchart value={totalVolumeUSD}/>
+        </main>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero section with key metrics */}
         <div className="mb-8">
@@ -168,26 +171,24 @@ console.log("pools", pools);
 
 
 interface SortableHeaderProps {
-  label: string
-  sortKey: string
-  sortConfig: {
-    key: string
-    direction: "ascending" | "descending"
-  }
-  requestSort: (key: string) => void
+  label: string,
+  sortKey?: string,
+  requestSort?: (key: string) => void,
+  sortConfig?: { key: string, direction: "asc" | "desc" },
+ 
 }
 
 
-function SortableHeader({ label, sortKey, sortConfig, requestSort }: SortableHeaderProps) {
+function SortableHeader({ label}: SortableHeaderProps) {
   return (
     <th
       scope="col"
       className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer"
-      onClick={() => requestSort(sortKey)}
+      
     >
       <div className="flex items-center">
         {label}
-        <ArrowUpDown className={`ml-1 h-4 w-4 ${sortConfig?.key === sortKey ? "text-pink-500" : "text-gray-600"}`} />
+        <ArrowUpDown className={`ml-1 h-4 w-4  text-gray-500`} />
       </div>
     </th>
   )
