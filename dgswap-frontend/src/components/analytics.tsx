@@ -9,8 +9,10 @@ import { DataTable } from "../components/data-table"
 import { SearchFilter } from "../components/search-filter"
 import { TimeframeSelector } from "../components/timeframe-selector"
 import { NavSelector } from "./navigation"
-import { TokenCard } from "./TokenCard"
 import { ArrowUpDown } from "lucide-react"
+import { Tvl } from "./Area"
+import { Barchart } from "./Barchart"
+import {motion} from "framer-motion"
 
 export function Analytics() {
   const [activeTab, setActiveTab] = useState<"overview" | "pools" | "tokens">("overview")
@@ -34,7 +36,27 @@ console.log("pools", pools);
   return (
     <div className="min-h-screen bg-[#191B1F] text-white">
       <Header />
+      <main className="res max-w-7xl flex gap-3 justify-around items-center mx-auto px-4 sm:px-6 lg:px-8 py-8">
+       <motion.div 
+        whileInView={{opacity:1,x:0}}
+        initial={{opacity:0,x:-100}}
+        transition={{duration:1}}
+        className="size"
+       >
 
+       <Tvl value={1800000}/>
+      </motion.div> 
+      <motion.div
+       whileInView={{opacity:1,x:0}}
+       initial={{opacity:0,x:100}}
+       transition={{duration:1}}
+       className="size"
+      
+      >
+
+        <Barchart value={totalVolumeUSD}/>
+      </motion.div>
+        </main>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero section with key metrics */}
         <div className="mb-8">
@@ -106,7 +128,11 @@ console.log("pools", pools);
               <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1h.toFixed(2)}%</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1d.toFixed(2)}%</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.volumeUSD)}</td>
+<<<<<<< HEAD
               <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.totalSupply)}</td>
+=======
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(Number(token.totalSupply))}</td>
+>>>>>>> f38fe6af381fcb0142c838a220ea2edb6f26f156
               <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.fullyDilutedValuation)}</td>
             </tr>
           ))}
@@ -168,26 +194,24 @@ console.log("pools", pools);
 
 
 interface SortableHeaderProps {
-  label: string
-  sortKey: string
-  sortConfig: {
-    key: string
-    direction: "ascending" | "descending"
-  }
-  requestSort: (key: string) => void
+  label: string,
+  sortKey?: string,
+  requestSort?: (key: string) => void,
+  sortConfig?: { key: string, direction: "asc" | "desc" },
+ 
 }
 
 
-function SortableHeader({ label, sortKey, sortConfig, requestSort }: SortableHeaderProps) {
+function SortableHeader({ label}: SortableHeaderProps) {
   return (
     <th
       scope="col"
       className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider cursor-pointer"
-      onClick={() => requestSort(sortKey)}
+      
     >
       <div className="flex items-center">
         {label}
-        <ArrowUpDown className={`ml-1 h-4 w-4 ${sortConfig?.key === sortKey ? "text-pink-500" : "text-gray-600"}`} />
+        <ArrowUpDown className={`ml-1 h-4 w-4  text-gray-500`} />
       </div>
     </th>
   )
