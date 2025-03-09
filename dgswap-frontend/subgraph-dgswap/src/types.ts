@@ -46,10 +46,10 @@ export interface Token {
 
 // Interface for daily pool data (used for volume and APR)
 export interface PoolDayData {
-  volumeUSD: string;       // Daily volume in USD
-  feesUSD: string;         // Daily fees in USD
-  date: string;           // Date timestamp
+  volumeUSD: string;
+  feesUSD?: string; // Optional since only in 'apr'
 }
+
 
 // Interface for Pool with calculated fields
 export interface Pool {
@@ -67,12 +67,20 @@ export interface Pool {
     symbol: string;
     name?: string;        // Added for completeness
   };
-  totalValueLockedUSD?: number;    // TVL in USD (optional, from subgraph)
-  volumeUSD?: string;             // Cumulative volume (optional, from subgraph)
-  poolDayData?: PoolDayData[];    // Daily data for volume and APR calculations
+  // totalValueLockedUSD?: number;    // TVL in USD (optional, from subgraph)
+  // volumeUSD?: string;             // Cumulative volume (optional, from subgraph)
+  // poolDayData?: PoolDayData[];    // Daily data for volume and APR calculations
   
-  // Calculated fields added by useSubgraphData
-  volumeUSD1d?: number;          // Calculated 1-day volume
-  volumeUSD30d?: number;         // Calculated 30-day volume
-  apr?: number;                  // Calculated APR
+  // // Calculated fields added by useSubgraphData
+  // volumeUSD1d?: number;          // Calculated 1-day volume
+  // volumeUSD30d?: number;         // Calculated 30-day volume
+  // apr?: number;                  // Calculated APR
+
+
+  totalValueLockedUSD?: string | number;
+  volumeUSD?: string;
+  apr?: PoolDayData[]; // Matches your JSON structure
+  volumeUSD1d?: PoolDayData[];
+  volumeUSD30d?: PoolDayData[];
+
 }

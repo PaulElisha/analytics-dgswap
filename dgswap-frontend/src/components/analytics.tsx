@@ -106,7 +106,7 @@ console.log("pools", pools);
               <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1h.toFixed(2)}%</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{token.priceChange1d.toFixed(2)}%</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.volumeUSD)}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatNumber(token.totalSupply)}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.totalSupply)}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{formatUSD(token.fullyDilutedValuation)}</td>
             </tr>
           ))}

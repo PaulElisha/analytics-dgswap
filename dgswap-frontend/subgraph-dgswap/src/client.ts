@@ -125,13 +125,13 @@ export class DragonSwapSubgraphSDK {
     totalValueLockedUSD  # TVL
     feeTier
     volumeUSD           # Cumulative volume
-    volumeUSD1d: poolDayData(orderBy: date, orderDirection: desc, first: 1) {
+    volumeUSD1d: poolDayData(orderBy: date, orderDirection: desc, first: 2) {
       volumeUSD         # 1D volume
     }
     volumeUSD30d: poolDayData(orderBy: date, orderDirection: desc, first: 30) {
       volumeUSD         # 30D volume will need aggregation on client-side
     }
-    apr: poolDayData(orderBy: date, orderDirection: desc, first: 1) {
+    apr: poolDayData(orderBy: date, orderDirection: desc, first: 2) {
       feesUSD
       volumeUSD
       # APR would need to be calculated: (feesUSD/volumeUSD) * 365 * 100
@@ -158,11 +158,11 @@ export class DragonSwapSubgraphSDK {
     volumeUSD           # Total volume
     derivedUSD          # Price in USD
     fullyDilutedValuation: totalValueLockedUSD  # FDV = price * total supply
-    tokenHourData(orderBy: periodStartUnix, orderDirection: desc, first: 1) {
+     tokenHourData(orderBy: periodStartUnix, orderDirection: desc, first: 2){
       priceUSD          # Latest price
   
     }
-    tokenDayData(orderBy: date, orderDirection: desc, first: 1) {
+    tokenDayData(orderBy: date, orderDirection: desc, first: 2) {
       priceUSD         # Latest price
       volumeUSD        # 1-day volume
     }
