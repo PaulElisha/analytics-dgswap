@@ -46,7 +46,7 @@ export interface Token {
 
 // Interface for daily pool data (used for volume and APR)
 export interface PoolDayData {
-  volumeUSD: string;
+  volumeUSD: number;
   feesUSD?: string; // Optional since only in 'apr'
 }
 

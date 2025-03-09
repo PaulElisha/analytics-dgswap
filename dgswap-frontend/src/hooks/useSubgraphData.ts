@@ -6,9 +6,9 @@ import { Factory, Pool, Token } from "../../subgraph-dgswap/src";
 
 interface ProcessedPool extends Pool {
   totalValueLockedUSD: number; // Override to number from string | undefined
-  volumeUSD1d: number;
-  volumeUSD30d: number;
-  apr: number;
+  volumeUSD1d: any;
+  volumeUSD30d:any;
+  apr: any;
 }
 
 // Define the extended Token type including calculated fields
