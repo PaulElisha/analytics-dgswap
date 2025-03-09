@@ -1,5 +1,5 @@
 "use client"
-import { formatUSD, formatNumber } from "../utils/format"
+import { formatUSD } from "../utils/format"
 import { useState } from "react"
 import { useSubgraphData } from "../hooks/useSubgraphData"
 import { Header } from "../components/Header"
